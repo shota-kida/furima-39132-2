@@ -27,14 +27,13 @@
 | item       | references | null: false, 外部キー           |
 | user       | references | null: false, 外部キー           |
 
-### Association
 
+### Association
 - belongs_to :users
 - belongs_to :items
 
 
 ## items テーブル
-
 | Column         | Type       | Options               |
 | ------         | ------     | -----------           |
 | title          | string     | null: false           |
@@ -47,8 +46,8 @@
 | price          | string     | null: false           |
 | user           | references | null: false,外部キー   |
 
-### Association
 
+### Association
 - has_many :users
 - has_many :comments
 _ has_one:buys
