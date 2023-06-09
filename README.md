@@ -4,7 +4,7 @@
 
 | Column             | Type   | Options                  |
 | ------------------ | ------ | -----------              |
-| email              | string | null: false ,unique      |
+| email              | string | null: false ,unique: true|
 | encrypted_password | string | null: false              |
 | name               | string | null: false              |
 | nickname           | string | null: false              |
@@ -25,8 +25,8 @@
 | Column     | Type       | Options                        |
 | ------     | ---------- | ------------------------------ |
 | content    | text       | null: false                    |
-| item_id    | references | null: false, foreign_key       |
-| user_id    | references | null: false, foreign_key       |
+| item       | references | null: false, foreign_key       |
+| user       | references | null: false, foreign_key       |
 
 
 ### Association
@@ -39,13 +39,13 @@
 | ------           | ------     | -----------            |
 | title            | string     | null: false            |
 | catch_copy       | text       | null: false            |
-| category         | integer    | null: false            |
-| situation        | integer    | null: false            |
-| load             | integer    | null: false            |
+| category_id      | integer    | null: false            |
+| situation_id     | integer    | null: false            |
+| load_id          | integer    | null: false            |
 | shipping_area_id | integer    | null: false            |
-| delivery_day     | integer    | null: false            |
+| delivery_day_id  | integer    | null: false            |
 | price            | string     | null: false            |
-| user_id          | references | null: false,foreign_key|
+| user             | references | null: false,foreign_key|
 
 
 ### Association
@@ -56,9 +56,11 @@
 
 
 ## purchases テーブル
-| user_id             | references | null: false,foreign_key|
-| item_id             | references | null: false,foreign_key|
-| shipping_address_id | references | null: false,foreign_key|
+
+| Column              | Type       | Options                |
+| ------              | ------     | -----------            |
+| user                | references | null: false,foreign_key|
+| item                | references | null: false,foreign_key|
 
 ### Association
 - belongs_to :user
@@ -76,7 +78,7 @@
 | number             | string     | null: false            |
 | building_name      | string     |                        |
 | phone_number       | string     | null: false            |
-| purchase_id        | references | null: false            |
+| purchase           | references | null: false            |
 
 ### Association
 - belongs_to :purchase
