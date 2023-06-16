@@ -4,7 +4,7 @@ FactoryBot.define do
 
     email { Faker::Internet.free_email }
     password { Faker::Alphanumeric.alphanumeric(number: 6, min_alpha: 1, min_numeric: 1) }
-    encrypted_password { password }
+    password_confirmation { password }
     name { '山田' }
     nickname { Faker::Name.initials(number: 2) }
     name_zenkaku { '太郎' }
