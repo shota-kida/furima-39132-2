@@ -50,7 +50,7 @@
           商品の状態
           <span class="indispensable">必須</span>
         </div>
-        <%= f.collection_select :situation_id, Situation.all, :id, :name, {}, { class: "select-box", id: "item-sales-status" } %>
+        <%= f.collection_select :situation_id, Situation.all, :id, :name, {}, { class: "select-box", id: "item-category" } %>
       </div>
     </div>
 
@@ -64,7 +64,7 @@
           配送料の負担
           <span class="indispensable">必須</span>
         </div>
-         <%= f.collection_select :load_id, Load.all, :id, :name, {}, { class: "select-box", id: "item-shipping-fee-status" } %>
+         <%= f.collection_select :load_id, Load.all, :id, :name, {}, { class: "select-box", id: "item-load" } %>
         <div class="weight-bold-text">
           発送元の地域
           <span class="indispensable">必須</span>
