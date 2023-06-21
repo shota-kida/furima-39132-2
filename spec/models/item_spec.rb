@@ -18,6 +18,12 @@ RSpec.describe Item, type: :model do
       expect(@item.errors.full_messages).to include("Title can't be blank")
     end
 
+    it '画像がからでは登録できないこと' do
+      @item.image = nil
+      @item.valid?
+      expect(@item.errors.full_messages).to include("Image must be attached")
+    end
+
     it 'catch_copyが空では登録できないこと' do
       @item.catch_copy = ''
       @item.valid?
@@ -88,6 +94,24 @@ RSpec.describe Item, type: :model do
       @item.price = nil
       @item.valid?
       expect(@item.errors.full_messages).to include("Price can't be blank")
+    end
+
+    it '商品価格に半角数字以外が含まれていると出品できないこと' do
+      @item.price = 'abc'
+      @item.valid?
+      expect(@item.errors.full_messages).to include("Price is not a number")
+    end
+    
+    it '商品価格が299円以下では出品できないこと' do
+      @item.price = 299
+      @item.valid?
+      expect(@item.errors.full_messages).to include("Price must be greater than or equal to 300")
+    end
+    
+    it '商品価格が10,000,000円以上では出品できないこと' do
+      @item.price = 10_000_000
+      @item.valid?
+      expect(@item.errors.full_messages).to include("Price must be less than or equal to 9999999")
     end
   end
 
