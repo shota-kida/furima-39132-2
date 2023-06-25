@@ -1,11 +1,10 @@
-
 <div class="items-sell-contents">
   <header class="items-sell-header">
     <%= link_to image_tag('furima-logo-color.png' , size: '185x50'), "/" %>
   </header>
   <div class="items-sell-main">
     <h2 class="items-sell-title">商品の情報を入力</h2>
-    <%= form_with model: @item do |f| %>
+    <%= form_with model: @item, local: true do |f| %>
 
     <%= render 'shared/error_messages', model: f.object %>
 
@@ -98,7 +97,7 @@
             <span class="indispensable">必須</span>
           </div>
           <span class="sell-yen">¥</span>
-          <%= f.text_field :hoge, class:"price-input", id:"item-price", placeholder:"例）300" %>
+          <%= f.text_field :price, class:"price-input", id:"item-price", placeholder:"例）300" %>
         </div>
         <div class="price-content">
           <span>販売手数料 (10%)</span>
@@ -135,10 +134,11 @@
       </p>
     </div>
     <%# /注意書き %>
+
     <%# 下部ボタン %>
     <div class="sell-btn-contents">
-      <%= f.submit "変更する" ,class:"sell-btn" %>
-      <%=link_to 'もどる', "#", class:"back-btn" %>
+      <%= f.submit "変更する", class:"sell-btn" %>
+      <%= link_to 'もどる', item_path(@item), class:"back-btn" %>
     </div>
     <%# /下部ボタン %>
   </div>
