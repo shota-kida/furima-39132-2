@@ -33,9 +33,9 @@ RSpec.describe PurchaseAddress, type: :model do
       end
 
       it 'shipping_area_idを選択していないと保存できないこと' do
-        @purchase_address.shipping_area_id = nil
+        @purchase_address.shipping_area_id = 1
         @purchase_address.valid?
-        expect(@purchase_address.errors.full_messages).to include("Shipping area can't be blank")
+        expect(@purchase_address.errors.full_messages).to include("Shipping area Shipping area id can't be blank")
       end
 
       it 'citiesが空だと保存できないこと' do
@@ -56,8 +56,20 @@ RSpec.describe PurchaseAddress, type: :model do
         expect(@purchase_address.errors.full_messages).to include("Phone number can't be blank")
       end
 
-      it 'phone_numberが10桁以上11桁以内の半角数値のみ保存可能なこと' do
-        @purchase_address.phone_number = '45678901'
+      it 'phone_numberが9桁以下では保存できないこと' do
+        @purchase_address.phone_number = '123456789'
+        @purchase_address.valid?
+        expect(@purchase_address.errors.full_messages).to include("Phone number is invalid")
+      end
+      
+      it 'phone_numberが12桁以上では保存できないこと' do
+        @purchase_address.phone_number = '123456789012'
+        @purchase_address.valid?
+        expect(@purchase_address.errors.full_messages).to include("Phone number is invalid")
+      end
+      
+      it 'phone_numberが半角数字以外の文字を含む場合は保存できないこと' do
+        @purchase_address.phone_number = '123-4567-8901'
         @purchase_address.valid?
         expect(@purchase_address.errors.full_messages).to include("Phone number is invalid")
       end
