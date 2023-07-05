@@ -1,10 +1,16 @@
 class PurchasesController < ApplicationController
-  before_action :authenticate_user!, only: [:create, ]
+  before_action :authenticate_user!, only: [:create, :index]
 
 
   def index
     @item = Item.find(params[:item_id])
     @purchase_address = PurchaseAddress.new
+
+    if user_signed_in?
+      if current_user == @item.user || @item.purchase.present?
+        redirect_to root_path
+      end
+    end
   end
 
   def create

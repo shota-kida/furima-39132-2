@@ -12,11 +12,6 @@ class ItemsController < ApplicationController
 
   def show
     @item = Item.find(params[:id])
-    @purchase = Purchase.where(item_id: @item.id)
-
-    if user_signed_in? && current_user == @item.user && @purchase.blank?
-      redirect_to root_path
-  end
   end
   
   def create
@@ -30,7 +25,7 @@ class ItemsController < ApplicationController
   end
 
   def edit
-    if @item.user == current_user
+    if @item.user == current_user && !@item.purchase.present?
       render :edit
     else
       redirect_to root_path
